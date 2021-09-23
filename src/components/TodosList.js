@@ -4,13 +4,14 @@ import TodoItem from "./TodoItem";
 class TodosList extends React.Component {
   render() {
     return (
-      <ul className="list-group m-2">
+      <ul>
         {this.props.todos.map(todo => (
           <TodoItem 
             key={todo.id}
             todo={todo}
             handleChangeProps={this.props.handleChangeProps}
             deleteTodoProps={this.props.deleteTodoProps}
+            setUpdate={this.props.setUpdate}
           />
         ))}
       </ul>

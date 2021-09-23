@@ -1,9 +1,25 @@
 import React from "react";
 
 const Header = () => {
+  const headerStyle = {
+    padding: "20px 0",
+    lineHeight: "1.5em",
+  };
   return (
-    <header className="m-2">
-      <h1 className="w-100 text-center">ToDo's</h1>
+    <header 
+      style={headerStyle}
+    >
+      <h1 
+        style={{
+            fontSize: "6rem",
+            fontWeight: "600",
+            marginBottom: "2rem",
+            lineHeight: "1em",
+            color: "#ececec",
+            textTransform: "lowercase",
+            textAlign: "center",
+        }}
+      >ToDo's</h1>
     </header>
   );
 };
