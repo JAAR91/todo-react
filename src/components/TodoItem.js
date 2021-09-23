@@ -3,7 +3,7 @@ import React from "react";
 class TodoItem extends React.Component {
   render() {
     return (
-        <li className="my-1 rounded border p-2">
+        <li className="list-group-item">
           <input 
             type="checkbox"
             checked={this.props.todo.completed}
