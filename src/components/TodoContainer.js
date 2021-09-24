@@ -6,50 +6,58 @@ import Header from "./Header";
 
 class TodoContainer extends React.Component {
 
-  state = {
-    todos: [
-      {
-        id: 1,
-        title: "Setup development environment",
-        completed: true
-      },
-      {
-        id: 2,
-        title: "Develop website and add content",
-        completed: false
-      },
-      {
-        id: 3,
-        title: "Deploy to live server",
-        completed: false
-      }
-    ]
-  };
+  constructor() {
+    super();
+
+    const LoadLocalStorage = JSON.parse(localStorage.getItem("ToDo"));
+    console.log(LoadLocalStorage);
+
+    const DefaultTod = {
+      todos: [
+        {
+          id: 1,
+          title: "Setup development environment",
+          completed: true
+        },
+        {
+          id: 2,
+          title: "Develop website and add content",
+          completed: false
+        },
+        {
+          id: 3,
+          title: "Deploy to live server",
+          completed: false
+        }
+      ]
+    };
+    this.state = LoadLocalStorage ? LoadLocalStorage : DefaultTod;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state.todos);
+    localStorage.setItem("ToDo", JSON.stringify(this.state));
+  }
 
   handleChange = (id) => {
-    this.setState(prevState => {
-      return {
-        todos: prevState.todos.map(todo => {
-          if (todo.id === id) {
-            return {
-              ...todo,
-              completed: !todo.completed,
-            }
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
           }
-          return todo
-        }),
-      };
-    });
+        }
+        return todo
+      }),
+    }));
   };
 
   delTodo = id => {
-    this.setState({
-      todos: [
-        ...this.state.todos.filter(todo => {
-          return todo.id !== id;
-        })
-      ]
-    });
+    const newArray = {
+      todos: [...this.state.todos.filter(todo => todo.id !== id)]
+    };
+    this.setState(newArray);
   };
 
   addTodoItem = title => {
@@ -58,9 +66,10 @@ class TodoContainer extends React.Component {
       title: title,
       completed: false
     };
-    this.setState({
+    const updateTodo = {
       todos: [...this.state.todos, newTodo]
-    });
+    };
+    this.setState(updateTodo);
   };
 
   setUpdate = (updatedTitle, id) => {
