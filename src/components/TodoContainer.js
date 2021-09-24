@@ -54,10 +54,7 @@ class TodoContainer extends React.Component {
   };
 
   delTodo = id => {
-    const newArray = {
-      todos: [...this.state.todos.filter(todo => todo.id !== id)]
-    };
-    this.setState(newArray);
+    this.setState({todos: [...this.state.todos.filter(todo => todo.id !== id)]});
   };
 
   addTodoItem = title => {
@@ -66,10 +63,9 @@ class TodoContainer extends React.Component {
       title: title,
       completed: false
     };
-    const updateTodo = {
+    this.setState({
       todos: [...this.state.todos, newTodo]
-    };
-    this.setState(updateTodo);
+    });
   };
 
   setUpdate = (updatedTitle, id) => {
