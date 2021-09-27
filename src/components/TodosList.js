@@ -10,7 +10,7 @@ class TodosList extends React.Component {
 
   render() {
     const {
-      handleChangeProps, deleteTodoProps, setUpdate, SavetoLocal, todos,
+      handleChangeProps, deleteTodoProps, setUpdate, todos,
     } = this.props;
 
     return (
@@ -22,7 +22,6 @@ class TodosList extends React.Component {
             handleChangeProps={handleChangeProps}
             deleteTodoProps={deleteTodoProps}
             setUpdate={setUpdate}
-            SavetoLocal={SavetoLocal}
           />
         ))}
       </ul>
@@ -35,7 +34,6 @@ TodosList.propTypes = {
   handleChangeProps: PropTypes.func.isRequired,
   deleteTodoProps: PropTypes.func.isRequired,
   setUpdate: PropTypes.func.isRequired,
-  SavetoLocal: PropTypes.func.isRequired,
 };
 
 export default TodosList;
