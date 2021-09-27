@@ -1,32 +1,38 @@
-import React, { Component } from "react"
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class InputTodo extends Component {
-    
-  state = {
-    title: ""
-  }; 
+  constructor() {
+    super();
+    this.state = {
+      title: '',
+    };
+  }
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({
-        [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
+    const { title } = this.state;
+    const { addTodoProps } = this.props;
     e.preventDefault();
-    if (this.state.title.trim()) {
-      this.props.addTodoProps(this.state.title);
+    if (title.trim()) {
+      addTodoProps(title);
       this.setState({
-        title: "",
+        title: '',
       });
     } else {
-      alert("This object cant be empty!")
+      alert('This object cant be empty!');// eslint-disable-line
     }
   };
-  
+
   render() {
+    const { title } = this.state;
     return (
-      <form 
+      <form
         className="m-2 p-2 form-container"
         onSubmit={this.handleSubmit}
       >
@@ -35,14 +41,22 @@ class InputTodo extends Component {
           name="title"
           type="text"
           placeholder="Add Todo..."
-          value={this.state.title}
+          value={title}
           onChange={this.onChange}
         />
         <button
+          type="button"
           className="mx-2 input-submit"
-        >Submit</button>
+        >
+          Submit
+        </button>
       </form>
     );
   }
 }
+
+InputTodo.propTypes = {
+  addTodoProps: PropTypes.func.isRequired,
+};
+
 export default InputTodo;
